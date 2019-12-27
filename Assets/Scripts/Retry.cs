@@ -17,6 +17,9 @@ public class Retry : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             SceneManager.LoadScene("Menu");
+            Player.morreu = false;
+            Player.salvou = false;
+            GameControl.vidas = 3;
         }
         
     }

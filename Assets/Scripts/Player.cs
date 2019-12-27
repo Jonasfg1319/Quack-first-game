@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public static bool salvou = false;
+    public static bool morreu = false;
     private float speed = 5f;
     Rigidbody2D rb;
     Animator anim;
@@ -12,6 +14,7 @@ public class Player : MonoBehaviour
     float jumpforce = 500f;
     public Transform groundcheck;
     public bool facinright = false;
+    public bool Cr = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,8 @@ public class Player : MonoBehaviour
 
             flip();
         }
+
+        
     }
 
     void flip() {
@@ -54,17 +59,29 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("migo"))
         {
-            SceneManager.LoadScene("End");
+            Destroy(this.gameObject);
+            salvou = true;
+            
         }
 
         if (col.gameObject.CompareTag("espinho"))
         {
-            SceneManager.LoadScene("Game Over");
+            GameControl.vidas -= 1;
+            morreu = true;
+            Destroy(this.gameObject);
+            
+           
         }
 
         if (col.gameObject.CompareTag("bola"))
         {
-            SceneManager.LoadScene("Game Over");
+            GameControl.vidas -= 1;
+            morreu = true;
+            Destroy(this.gameObject);
+
+            
         }
     }
+
+      
 }
